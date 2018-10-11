@@ -16,12 +16,14 @@ def stallen(nummer: str):
     try:                                                                    # Checken of fiets al gestald is, zo niet
         if (lijst[index][4] == 'True'):                                     # dan de waarde 'gestald' naar True.
             print('De fiets is al gestald.')                                # En de tijd toevoegen.
+            return 2
         elif lijst[index][4] == 'False':
+            lijst[index][5] = datetime.datetime.today().strftime("%a %d %b %Y om %H:%M:%S")
             lijst[index][4] = 'True'
             print('De fiets is gestald.')
     except:
         print('Incorrect nummer.')
-    lijst[index][5] = datetime.datetime.today().strftime("%a %d %b %Y om %H:%M:%S")
+        return 1
 
     newFile = ''                                                            # eventuele verandering opslaan in csv
     for x in lijst:
@@ -34,5 +36,5 @@ def stallen(nummer: str):
                 newFile = newFile+y+'\n'
     open(bestand,'w').write(newFile)
     open(bestand).close()
-
-stallen(1234567890)
+    return 0
+print(stallen(1235468790))
