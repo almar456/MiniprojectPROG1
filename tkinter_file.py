@@ -1,5 +1,9 @@
 from tkinter import *                                   # Tkinter importen om te gebruiken
 
+logged_in = False
+
+inlog_gegevens = []
+
 
 def toon_start_frame():                                 # Functie om start_frame te laten zien
     fiets_stallen_frame.pack_forget()
@@ -39,7 +43,12 @@ def toon_fiets_ophalen():                               # Functie om fiets_ophal
     start_frame.pack_forget()
     fiets_ophalen_frame.pack(fill="both",
                              expand=True)
+    if logged_in:
+        print("u bent ingelogd")
+    else:
+        button__login_fiets_ophalen.pack(padx=20, pady=20)
     button_ga_terug_ophalen.pack(padx=20, pady=20)
+
 
 # sub frames laten zien
 
@@ -48,6 +57,10 @@ def toon_geregistreerd_stallen():
     fiets_stallen_frame.forget()
     geregistreerd_stallen_frame.pack(fill="both",
                                      expand=True)
+    if logged_in:
+        print("u bent ingelogd")
+    else:
+        button_login_fiets_geregistreerd.pack(padx=20, pady=20)
     button_ga_terug_stallen_geregistreerd.pack(padx=20, pady=20)
 
 
@@ -55,6 +68,10 @@ def toon_niet_geregistreerd_stallen():
     fiets_stallen_frame.forget()
     niet_geregistreerd_stallen_frame.pack(fill="both",
                                           expand=True)
+    if logged_in:
+        print("u bent ingelogd")
+    else:
+        button_login_fiets_niet_geregistreerd.pack(padx=20, pady=20)
     button_ga_terug_stallen_niet_geregistreerd.pack(padx=20, pady=20)
 
 
@@ -69,7 +86,30 @@ def toon_info_persoonlijk():
     info_frame.forget()
     info_persoonlijk_frame.pack(fill="both",
                                 expand=True)
+    if logged_in:
+        print("u bent ingelogd")
+    else:
+        button_login_info.pack(padx=20, pady=20)
     button_ga_terug_info_persoonlijk.pack(padx=20, pady=20)
+
+
+def login():
+    info_persoonlijk_frame.forget()
+    niet_geregistreerd_stallen_frame.forget()
+    geregistreerd_stallen_frame.forget()
+    fiets_ophalen_frame.forget()
+    inloggen_frame.pack(fill="both", expand=True)
+    gebruikersnaam_entry.pack(padx=20, pady=20)
+    wachtwoord_entry.pack(padx=20, pady=20)
+    button_confirm_login.pack(padx=20, pady=20)
+
+
+def login_confirm():
+    gebruikersnaam = gebruikersnaam_entry.get()
+    wachtwoord = wachtwoord_entry.get()
+    inlog_gegevens.append(gebruikersnaam)
+    inlog_gegevens.append(wachtwoord)
+    return inlog_gegevens
 
 
 root = Tk()
@@ -102,6 +142,9 @@ info_algemeen_frame = Frame(master=root,
 
 info_persoonlijk_frame = Frame(master=root,
                                background='#f7d417')
+
+inloggen_frame = Frame(master=root,
+                       background="#f7d417")
 
 # buttons
 
@@ -196,8 +239,40 @@ button_ga_terug_stallen_niet_geregistreerd = Button(master=niet_geregistreerd_st
                                                     background="#00387b",
                                                     fg="white")
 
+# login buttons
+
+button_login_info = Button(master=info_persoonlijk_frame,                   # om de button een functie mee tegeven:
+                           text="Login",                                    # voeg command=functie toe
+                           background="#00387b",                            # belangrijk: schrijf de functie zonder ()
+                           fg="white",
+                           command=login)
+button_login_fiets_geregistreerd = Button(master=geregistreerd_stallen_frame,
+                                          text="Login",
+                                          background="#00387b",
+                                          fg="white",
+                                          command=login)
+button_login_fiets_niet_geregistreerd = Button(master=niet_geregistreerd_stallen_frame,
+                                               text="Login",
+                                               background="#00387b",
+                                               fg="white",
+                                               command=login)
+button__login_fiets_ophalen = Button(master=fiets_ophalen_frame,
+                                     text="Login",
+                                     background="#00387b",
+                                     fg="white",
+                                     command=login)
+
+button_confirm_login = Button(master=inloggen_frame,
+                              text="Login",
+                              background="#00387b",
+                              fg="white",
+                              command=login_confirm)
+
+# login velden
+gebruikersnaam_entry = Entry(master=inloggen_frame)
+wachtwoord_entry = Entry(master=inloggen_frame)
+
 
 toon_start_frame()                                      # start_frame uitvoeren
 root.mainloop()                                         # root mainloop uitvoeren
-
-### testsa
+print(inlog_gegevens)
