@@ -37,4 +37,3 @@ def stallen(nummer: str):
     open(bestand,'w').write(newFile)
     open(bestand).close()
     return 0
-print(stallen(1235468790))
