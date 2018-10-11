@@ -17,7 +17,7 @@ def stallen(nummer: str):
         if lijst[index][4] == 'True':                                       # dan de waarde 'gestald' naar True
             return 2                                                        # En de tijd toevoegen.
         elif lijst[index][4] == 'False':
-            lijst[index][5] = datetime.datetime.today().strftime("%a %d %b %Y om %H:%M:%S")
+            lijst[index][-1] = datetime.datetime.today().strftime("%a %d %b %Y om %H:%M:%S")
             lijst[index][4] = 'True'
     except:
         return 1
