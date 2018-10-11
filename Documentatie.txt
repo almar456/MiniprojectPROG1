@@ -1,0 +1,10 @@
+Stallen.py
+Aanroepen: stallen(fietscode)
+
+Returnwaarden:
+return 0 -> Het programma is voltooid, de fiets is gestald en op True gezet in de csv-file.
+return 1 -> Het ingevoerde fietsnummer is incorrect.
+return 2 -> De fiets staat al gestald in de stalling.
+
+Functie:
+Zet 'gestald' op True bij een ingevoerd fietsnummer, tenzij deze al op True staat.
