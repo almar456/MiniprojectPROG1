@@ -1,5 +1,5 @@
 Stallen.py
-Aanroepen: stallen(fietscode)
+Aanroepen: stallen(fietscode(als integer of string))
 
 Returnwaarden:
 return 0 -> Het programma is voltooid, de fiets is gestald en op True gezet in de csv-file.
