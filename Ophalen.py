@@ -33,5 +33,3 @@ def ophalen(username: str, wachtwoord: str):
     open(bestand, 'w').write(newFile)
     open(bestand).close()
     return 0
-
-ophalen('almar456', 'lmao420')

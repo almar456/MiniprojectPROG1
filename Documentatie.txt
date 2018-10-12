@@ -16,7 +16,7 @@ Aanroepen: ophalen(username(als string), wachtwoord(als string))
 Returnwaarden:
 return 0 -> Het programma is voltooid, de fiets is uit de stalling en staat op False in de csv-file.
 return 1 -> De ingevoerde combinatie van username en wachtwoord is incorrect.
-return 2 -> De fiets is niet gestald in de stalling.
+return 2 -> De fiets is niet gestald in de stalling, dus kan niet opgehaald worden.
 
 Functie:
 Zet 'gestald' op False als de ingevoerde username en wachtwoord correct zijn, tenzij 'gestald' al op False staat.
