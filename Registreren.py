@@ -4,10 +4,13 @@ def registreren(wachtwoord: str, username: str, naam: str):
     from random import randint
 
     # Genereer code d.m.v. randint
+
     code = randint(0, 10000000000)
 
     # Gegevens die de gebruiker invoert in een list
+
     gegevens = [code, wachtwoord, username, naam, False, '-']
+
     # Valideer het wachtwoord
 
     global valid
@@ -31,10 +34,9 @@ def registreren(wachtwoord: str, username: str, naam: str):
                 writer = csv.writer(fietsen_file, delimiter=';')
                 writer.writerow(gegevens)
                 print("Succesfully registered.")
-                print("The code to stall your bike is: " + str(code))
-            break
+                return print("The code to stall your bike is: " + str(code))
     if valid == -1:
         return print("Password doesn't meet the requirements.")
 
 
-registreren('lalala6', 'AJSijpenhof1337', 'AJ')
+registreren('abcdef1234', 'AJSijpenhof1337', 'AJ')
