@@ -1,15 +1,18 @@
 def registreren(wachtwoord: str, username: str, naam: str):
     import csv
     import re
+    import hashlib
     from random import randint
 
     # Genereer code d.m.v. randint
 
-    code = randint(0, 10000000000)
+    code = randint(0, 9999)
 
     # Gegevens die de gebruiker invoert in een list
 
-    gegevens = [code, wachtwoord, username, naam, False, '-']
+    pw_hash = hashlib.sha512(wachtwoord.encode('utf-8')).hexdigest()
+
+    gegevens = [code, pw_hash, username, naam, False, '-']
 
     # Valideer het wachtwoord
 
