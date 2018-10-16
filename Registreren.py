@@ -10,22 +10,22 @@ def registreren(wachtwoord: str, username: str, naam: str):
     gegevens = [code, wachtwoord, username, naam, False, '-']
     # Valideer het wachtwoord
 
-    flag = 0
+    global valid
 
-    #Validatie
+    valid = 0
 
     while True:
         if (len(wachtwoord) < 6):
-            flag = -1
+            valid = -1
             break
         elif not re.search("[a-z]", wachtwoord):
-            flag = -1
+            valid = -1
             break
         elif not re.search("[0-9]", wachtwoord):
-            flag = -1
+            valid = -1
             break
         else:
-            flag = 0
+            valid = 0
             # Schrijven naar de CSV file d.m.v. van import csv
             with open('fietsen.csv', mode='a', newline="") as fietsen_file:
                 writer = csv.writer(fietsen_file, delimiter=';')
@@ -33,7 +33,7 @@ def registreren(wachtwoord: str, username: str, naam: str):
                 print("Succesfully registered.")
                 print("The code to stall your bike is: " + str(code))
             break
-    if flag == -1:
+    if valid == -1:
         return print("Password doesn't meet the requirements.")
 
 
