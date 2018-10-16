@@ -34,9 +34,11 @@ def registreren(wachtwoord: str, username: str, naam: str):
                 writer = csv.writer(fietsen_file, delimiter=';')
                 writer.writerow(gegevens)
                 print("Succesfully registered.")
-                return print("The code to stall your bike is: " + str(code))
+                print("The code to stall your bike is: " + str(code))
+                return 0
     if valid == -1:
-        return print("Password doesn't meet the requirements.")
+        return 1
+        print("Password doesn't meet the requirements.")
 
 
 registreren('abcdef1234', 'AJSijpenhof1337', 'AJ')
