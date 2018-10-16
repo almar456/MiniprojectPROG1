@@ -20,3 +20,13 @@ return 2 -> De fiets is niet gestald in de stalling.
 
 Functie:
 Zet 'gestald' op False als de ingevoerde username en wachtwoord correct zijn, tenzij 'gestald' al op False staat.
+
+Registreren.py:
+Aanroepen: registereren(wachtwoord(als string), username(als string), volledigenaam(als string))
+
+Returnwaarden:
+return 0 -> Het programma heeft de gebruiker geregistreerd. De gebruiker wordt nu toegevoegd aan de csv-file.
+return 1 -> De gebruiker heeft een wachtwoord ingevoerd dat niet aan de requirementst voldoet.
+
+Functie:
+Registreert de gebruiker en voegt de ingevoerde gegevens toe aan de csv-file. De gebruiker krijgt ook een 4 cijferige code.
