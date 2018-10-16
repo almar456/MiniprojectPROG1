@@ -10,7 +10,9 @@ def registreren(wachtwoord: str, username: str, naam: str):
     gegevens = [code, wachtwoord, username, naam, False, '-']
     # Valideer het wachtwoord
 
-    valid = 0
+    flag = 0
+
+    #Validatie
 
     while True:
         if (len(wachtwoord) < 6):
