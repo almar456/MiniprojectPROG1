@@ -1,27 +1,8 @@
-import hashlib
+from passlib.hash import pbkdf2_sha256
 
-def hashPassword():
+hash = pbkdf2_sha256.hash(input("Input password: "))
 
-    password = input("Password:")
-
-    global hash
-
-    hash = hashlib.sha512(password.encode('utf-8')).hexdigest()
-
-    return print(hash)
-
-hashPassword()
-
-def checkPassword():
-
-    check = input("Input the password:")
-
-    hashpass = hashlib.sha512(check.encode('utf-8')).hexdigest()
-
-    if hashpass == hash:
-        print("Password correct!")
-
-    else:
-        print("Wrong password")
-
-checkPassword()
+if (pbkdf2_sha256.verify(input("Password: "), hash) == True):
+    print("Password correct!")
+else:
+    print("Password incorrect.")
