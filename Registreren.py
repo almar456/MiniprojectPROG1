@@ -1,6 +1,7 @@
 def registreren(wachtwoord: str, username: str, naam: str):
     import csv
     import re
+    from datetime import datetime
     from passlib.hash import pbkdf2_sha256
     from random import randint
 
@@ -8,11 +9,14 @@ def registreren(wachtwoord: str, username: str, naam: str):
 
     code = randint(0, 9999)
 
+    registeredDate = datetime.now().strftime("%x %X")
+
+
     # Gegevens die de gebruiker invoert in een list
 
     hash = pbkdf2_sha256.hash(wachtwoord)
 
-    gegevens = [code, hash, username, naam, False, '-']
+    gegevens = [code, hash, username, naam, registeredDate, False, '-']
 
     # Valideer het wachtwoord
 
