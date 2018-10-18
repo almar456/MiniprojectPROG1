@@ -3,11 +3,24 @@ def registreren(wachtwoord: str, username: str, naam: str):
     import re
     from datetime import datetime
     from passlib.hash import pbkdf2_sha256
-    from random import randint
+    from random import choice
 
     # Genereer code d.m.v. randint
 
-    code = randint(1000, 9999)
+    list = []
+
+    bestand = 'fietsen.csv'  # Informatie ophalen en in lijst zetten
+    file = open(bestand, 'r').read()
+    open(bestand).close()
+    lijst = file.split('\n')
+
+    for x in lijst:
+        lijst[lijst.index(x)] = x.split(';')
+
+    for x in lijst:
+        list.append(x[0])
+
+    code = choice([i for i in range(1000, 9999) if i not in list])
 
     registeredDate = datetime.now().strftime("%x %X")
 
@@ -19,6 +32,27 @@ def registreren(wachtwoord: str, username: str, naam: str):
     gegevens = [code, hash, username, naam, registeredDate, False, '-']
 
     # Valideer het wachtwoord
+
+    usernames = []
+
+    bestand = 'fietsen.csv'  # Informatie ophalen en in lijst zetten
+    file = open(bestand, 'r').read()
+    open(bestand).close()
+    lijst = file.split('\n')
+
+    for x in lijst:
+        lijst[lijst.index(x)] = x.split(';')
+
+    lijst.pop()
+
+    for x in lijst:
+        usernames.append(x[2])
+
+    try:
+        if username in usernames:
+            return print("Try Again!")
+    except:
+        print("Wrong!")
 
     global valid
 
@@ -51,4 +85,5 @@ def registreren(wachtwoord: str, username: str, naam: str):
         print("Password doesn't meet the requirements.")
 
 
-registreren('abcdef1234', 'AJSijpenhof1337', 'AJ')
+registreren('abcdef1234', 'mood', 'AJ')
+
