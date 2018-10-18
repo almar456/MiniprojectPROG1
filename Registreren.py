@@ -7,7 +7,7 @@ def registreren(wachtwoord: str, username: str, naam: str):
 
     # Genereer code d.m.v. randint
 
-    code = randint(0, 9999)
+    code = randint(1000, 9999)
 
     registeredDate = datetime.now().strftime("%x %X")
 
@@ -42,7 +42,10 @@ def registreren(wachtwoord: str, username: str, naam: str):
                 writer.writerow(gegevens)
                 print("Succesfully registered.")
                 print("The code to stall your bike is: " + str(code))
-                return 0
+
+                uniqueCode = code
+
+                return uniqueCode
     if valid == -1:
         return 1
         print("Password doesn't meet the requirements.")
