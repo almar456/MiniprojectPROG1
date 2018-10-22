@@ -85,5 +85,5 @@ def registreren(wachtwoord: str, username: str, naam: str):
         print("Password doesn't meet the requirements.")
 
 
-registreren('abcdef1234', 'mood', 'AJ')
+registreren('abcdef1234', 'patta', 'AJ')
 
