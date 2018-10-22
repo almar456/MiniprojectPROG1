@@ -50,7 +50,8 @@ def registreren(wachtwoord: str, username: str, naam: str):
 
     try:
         if username in usernames:
-            return print("Try Again!")
+            print("Try again! This user already exists.")
+            return 2
     except:
         print("Wrong!")
 
@@ -81,9 +82,11 @@ def registreren(wachtwoord: str, username: str, naam: str):
 
                 return uniqueCode
     if valid == -1:
-        return 1
         print("Password doesn't meet the requirements.")
+        return 1
 
 
-registreren('abcdef1234', 'patta', 'AJ')
+print(
+    registreren('goldfinger123', 'yayayeee', 'AJ')
+)
 
