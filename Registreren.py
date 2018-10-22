@@ -87,6 +87,6 @@ def registreren(wachtwoord: str, username: str, naam: str):
 
 
 print(
-    registreren('goldfinger123', 'yayayeee', 'AJ')
+    registreren('1234', 'yayayeee', 'AJ')
 )
 
