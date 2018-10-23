@@ -5,9 +5,10 @@ Returnwaarden:
 return 0 -> Het programma is voltooid, de fiets is gestald en op True gezet in de csv-file.
 return 1 -> Het ingevoerde fietsnummer is incorrect.
 return 2 -> De fiets staat al gestald in de stalling.
+return 3 -> De stalling is al vol, dus de fiets kan er niet bij gezet worden.
 
 Functie:
-Zet 'gestald' op True bij een ingevoerd fietsnummer, tenzij deze al op True staat.
+Zet 'gestald' op True bij een ingevoerd fietsnummer, tenzij deze al op True staat, en voegt de datum en tijd toe.
 
 
 Ophalen.py
