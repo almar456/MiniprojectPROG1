@@ -14,9 +14,9 @@ def registreren(wachtwoord: str, username: str, naam: str, user_code: str):
 
     # Gegevens die de gebruiker invoert in een list
 
-    # hash = pbkdf2_sha256.hash(wachtwoord)
+    hash = pbkdf2_sha256.hash(wachtwoord)
 
-    gegevens = [code, wachtwoord, username, naam, registeredDate, False, user_code, '-']
+    gegevens = [code, hash, username, naam, registeredDate, True, user_code, '-']
 
     # Valideer het wachtwoord
 

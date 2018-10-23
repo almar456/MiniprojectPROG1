@@ -1,15 +1,17 @@
 def ophalen(username: str, wachtwoord: str):
+    from passlib.hash import pbkdf2_sha256
     bestand = 'fietsen.csv'                                                     # Informatie ophalen en in lijst zetten
     file = open(bestand, 'r').read()
     open(bestand).close()
     lijst = file.split('\n')
+    hash = pbkdf2_sha256.hash(wachtwoord)
     for x in lijst:
         lijst[lijst.index(x)] = x.split(';')
 
     for x in lijst:                                                             # Login gegevens checken
         if x == ['']:
             break
-        if (x[1] == wachtwoord) and (x[2] == username):
+        if (pbkdf2_sha256.verify(wachtwoord, hash) == True) and (x[2] == username):
             index = lijst.index(x)
 
     try:

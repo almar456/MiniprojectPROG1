@@ -16,12 +16,14 @@ def toon_start_frame():                                 # Functie om start_frame
     fiets_stallen_frame.pack_forget()
     fiets_ophalen_frame.pack_forget()
     inloggen_frame.forget()
-    start_frame.forget()
     geregistreerd_stallen_frame.forget()
     niet_geregistreerd_stallen_frame.forget()
     info_persoonlijk_frame.forget()
     info_algemeen_frame.forget()
     info_frame.pack_forget()
+    button_info.pack(padx=20, pady=20)
+    button_fiets_stallen.pack(padx=20, pady=20)
+    button_fiets_ophalen.pack(padx=20, pady=20)
     start_frame.pack(fill="both",
                      expand=True)
 
@@ -55,12 +57,19 @@ def toon_fiets_stallen():                               # Functie om fiets_stall
     info_persoonlijk_frame.forget()
     info_algemeen_frame.forget()
     info_frame.pack_forget()
-
-    fiets_stallen_frame.pack(fill="both",
-                             expand=True)
-    button_geregistreerd_stallen.pack(padx=20,
-                                      pady=20)
-    button_niet_geregistreerd_stallen.pack(padx=20,
+    readfile = open('login_boolean.txt', 'r')
+    lines = readfile.readlines()
+    if 'True\n' in lines:
+        button_geregistreerd_stallen.pack(padx=20,
+                                          pady=20)
+        fiets_stallen_frame.pack(fill="both",
+                                 expand=True)
+    else:
+        fiets_stallen_frame.pack(fill="both",
+                                 expand=True)
+        button_geregistreerd_stallen.pack(padx=20,
+                                          pady=20)
+        button_niet_geregistreerd_stallen.pack(padx=20,
                                            pady=20)
 
 
@@ -105,6 +114,11 @@ def toon_niet_geregistreerd_stallen():
     if 'True\n' in lines:
         button_login_info.forget()
     else:
+        inloggen_frame.forget()
+        button_confirm_login.forget()
+        gebruikersnaam_entry.forget()
+        wachtwoord_entry.forget()
+        button_registreer_login.forget()
         naam_reg_entry.pack(padx=20, pady=20)
         gebruikersnaam_reg_entry.pack(padx=20, pady=20)
         wachtwoord_reg_entry.pack(padx=20, pady=20)
@@ -115,9 +129,9 @@ def toon_niet_geregistreerd_stallen():
 
 def toon_info_algemeen():
     info_frame.forget()
-    info_algemeen_frame.pack(fill="both",
-                             expand=True)
-
+    info_algemeen_frame.pack(fill="both", expand=True)
+    aantal_vrij_label = Label(master=info_algemeen_frame, text=algemeen())
+    aantal_vrij_label.pack(padx=20, pady=20)
 var = 0
 
 def toon_info_persoonlijk():
@@ -137,13 +151,15 @@ def toon_info_persoonlijk():
                 info_label = Label(master=info_persoonlijk_frame, text=persoonlijk(list2[1]))
                 naam_label = Label(master=info_persoonlijk_frame, text='Dit account staat op de naam: ' + naam(list2[1]))
                 fiets_nummer_label = Label(master=info_persoonlijk_frame, text='Uw fietsnummer is: ' + fietsnummer(list2[1]))
+                account_aangemaakt_label = Label(master=info_persoonlijk_frame, text=gemaakt(list2[1]))
                 info_label.pack_forget()
                 naam_label.pack_forget()
                 fiets_nummer_label.pack_forget()
-
+                account_aangemaakt_label.pack_forget()
                 info_label.pack(padx=20, pady=20)
                 naam_label.pack(padx=20, pady=20)
                 fiets_nummer_label.pack(padx=20, pady=20)
+                account_aangemaakt_label.pack(padx=20, pady=20)
     else:
         button_login_info.pack(padx=20, pady=20)
 
@@ -153,29 +169,33 @@ def login():
     niet_geregistreerd_stallen_frame.forget()
     geregistreerd_stallen_frame.forget()
     fiets_ophalen_frame.forget()
+    start_frame.forget()
+    button_fiets_ophalen.forget()
+    button_fiets_stallen.forget()
+    button_info.forget()
+    button_login_start.forget()
     inloggen_frame.pack(fill="both", expand=True)
     gebruikersnaam_entry.pack(padx=20, pady=20)
     wachtwoord_entry.pack(padx=20, pady=20)
     button_confirm_login.pack(padx=20, pady=20)
+    button_registreer_login.pack(padx=20, pady=20)
 
 
 def f_login():
         username = gebruikersnaam_entry.get()
         wachtwoord = wachtwoord_entry.get()
-        global hash
+        # global hash
         hash = pbkdf2_sha256.hash(wachtwoord)
         readfile = open('fietsen.csv', 'r').readlines()
         for lines in readfile:
             lijst = lines.split(';')
-            if username == lijst[2] and (pbkdf2_sha256.verify(wachtwoord, hash) == True):
+            if username == lijst[2] and (pbkdf2_sha256.verify(wachtwoord, hash) == True):           #(pbkdf2_sha256.verify(wachtwoord, hash) == True)
                 outfile = open('login_boolean.txt', 'w')
                 outfile.write('True\n'+username+'\n'+wachtwoord)
                 toon_start_frame()
                 break
         else:
             showinfo(title='popup', message='Uw ingevooerde combinatie is verkeerd!')
-
-        # showinfo(title='popup', message='Uw ingevooerde combinatie is verkeerd!')
 
 
 def if_loop():
@@ -195,7 +215,7 @@ def registreer():
         for lines in readfile:
             lijst = lines.split(';')
             if gebruikersnaam_reg_entry.get() == lijst[2]:
-                message = 'Uw acount is geregistreerd, de code voor uw fiets is:' + lijst[0] + '\n onthoud deze code goed!'
+                message = 'Uw acount is geregistreerd en uw fiets is gestald, de code voor uw fiets is:' + lijst[0] + '\n onthoud deze code goed!'
                 showinfo(title='popup', message=message)
                 toon_start_frame()
     elif registreren(wachtwoord_reg_entry.get(), gebruikersnaam_reg_entry.get(), naam_reg_entry.get(), user_key_entry.get()) == 1:
@@ -207,18 +227,17 @@ def info_ophalen():
     readfile = open('login_boolean.txt', 'r')
     lines = readfile.readlines()
     list2 = [x.replace('\n', '') for x in lines]
-    print(list2[2])
     if ophalen(list2[1], list2[2]) == 0:
         username = list2[1]
         pushover_send(username)
         showinfo(title='popup', message='U kunt uw fiets nu pakken')
-        # toon_start_frame()
+        toon_start_frame()
     elif ophalen(list2[1], list2[2]) == 2:
         showinfo(title='popup', message='Uw fiets is momenteel niet gestald')
+        toon_start_frame()
     elif ophalen(list2[1], list2[2]) == 1:
         print('verkeerd wachtwoord')
-    else:
-        print('wtf')
+
 
 root = Tk()
 
@@ -272,7 +291,6 @@ button_info = Button(master=start_frame,                # Button_info defineren
                      command=toon_info_frame,
                      background="#00387b",
                      fg="white")
-# button_info.config(height=150, width=300)
 button_info.pack(padx=20, pady=20)
 
 button_fiets_stallen = Button(master=start_frame,       # Button stallen defineren
@@ -289,6 +307,12 @@ button_fiets_ophalen = Button(master=start_frame,       # Button ophalen defiene
                               fg="white")
 button_fiets_ophalen.pack(padx=20, pady=20)
 
+button_login_start = Button(master=start_frame,
+                            text="Inloggen",
+                            command=login,
+                            background="#00387b",
+                            fg="white")
+button_login_start.pack(padx=20, pady=20)
 # sub buttons
 button_fiets_ophalen_confirm = Button(master=fiets_ophalen_frame,
                                       text="Weet u zeker dat u uw fiets wilt ophalen?",
@@ -359,6 +383,13 @@ button_registreer = Button(master=niet_geregistreerd_stallen_frame,
                            background="#00387b",
                            fg="white",
                            command=registreer)
+
+button_registreer_login = Button(master=inloggen_frame,
+                           text="Registreer",
+                           background="#00387b",
+                           fg="white",
+                           command=toon_niet_geregistreerd_stallen)
+
 
 # login velden
 gebruikersnaam_entry = Entry(master=inloggen_frame)
