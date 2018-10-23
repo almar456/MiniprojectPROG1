@@ -21,11 +21,17 @@ def toon_start_frame():                                 # Functie om start_frame
     info_persoonlijk_frame.forget()
     info_algemeen_frame.forget()
     info_frame.pack_forget()
-    button_info.pack(padx=20, pady=20)
-    button_fiets_stallen.pack(padx=20, pady=20)
-    button_fiets_ophalen.pack(padx=20, pady=20)
+    button_info.grid(row=1, column=1, padx=20, pady=20)
+    button_fiets_stallen.grid(row=2, column=1, padx=20, pady=20)
+    button_fiets_ophalen.grid(row=3, column=1, padx=20, pady=20)
     start_frame.pack(fill="both",
                      expand=True)
+    readfile = open('login_boolean.txt', 'r')
+    lines = readfile.readlines()
+    if 'True\n' in lines:
+        button_login_start.destroy()
+    else:
+        button_login_start.grid(row=4, column=1, padx=20, pady=20)
 
 
 def toon_info_frame():                                  # Functie om info_frame te laten zien
@@ -41,10 +47,18 @@ def toon_info_frame():                                  # Functie om info_frame 
 
     info_frame.pack(fill="both",
                     expand=True)
-    button_info_algemeen.pack(padx=20,
+    button_info_algemeen.grid(row=1,
+                              column=1,
+                              padx=20,
                               pady=20)
-    button_info_persoonlijk.pack(padx=20,
+    button_info_persoonlijk.grid(row=2,
+                                 column=1,
+                                 padx=20,
                                  pady=20)
+    info_frame.grid_rowconfigure(0, weight=1)
+    info_frame.grid_rowconfigure(3, weight=1)
+    info_frame.grid_columnconfigure(0, weight=1)
+    info_frame.grid_columnconfigure(2, weight=1)
 
 
 def toon_fiets_stallen():                               # Functie om fiets_stallen_frame te laten zien
@@ -59,17 +73,18 @@ def toon_fiets_stallen():                               # Functie om fiets_stall
     info_frame.pack_forget()
     readfile = open('login_boolean.txt', 'r')
     lines = readfile.readlines()
-    if 'True\n' in lines:
-        button_geregistreerd_stallen.pack(padx=20,
-                                          pady=20)
-        fiets_stallen_frame.pack(fill="both",
-                                 expand=True)
-    else:
-        fiets_stallen_frame.pack(fill="both",
-                                 expand=True)
-        button_geregistreerd_stallen.pack(padx=20,
-                                          pady=20)
-        button_niet_geregistreerd_stallen.pack(padx=20,
+    fiets_stallen_frame.grid_rowconfigure(0, weight=1)
+    fiets_stallen_frame.grid_rowconfigure(3, weight=1)
+    fiets_stallen_frame.grid_columnconfigure(0, weight=1)
+    fiets_stallen_frame.grid_columnconfigure(2, weight=1)
+    fiets_stallen_frame.pack(fill="both", expand=True )
+    button_geregistreerd_stallen.grid(row=1,
+                                      column=1,
+                                      padx=20,
+                                      pady=20)
+    button_niet_geregistreerd_stallen.grid(row=2,
+                                           column=1,
+                                           padx=20,
                                            pady=20)
 
 
@@ -88,11 +103,16 @@ def toon_fiets_ophalen():                               # Functie om fiets_ophal
                              expand=True)
     readfile = open('login_boolean.txt', 'r')
     lines = readfile.readlines()
+    fiets_ophalen_frame.grid_rowconfigure(0, weight=1)
+    fiets_ophalen_frame.grid_rowconfigure(2, weight=1)
+    fiets_ophalen_frame.grid_columnconfigure(0, weight=1)
+    fiets_ophalen_frame.grid_columnconfigure(2, weight=1)
     if 'True\n' in lines:
-        button__login_fiets_ophalen.forget()
-        button_fiets_ophalen_confirm.pack(pady=20, padx=20)
+        button__login_fiets_ophalen.destroy()
+        button_registreer_login.pack_forget()
+        button_fiets_ophalen_confirm.grid(row=1, column=1, pady=20, padx=20)
     else:
-        button__login_fiets_ophalen.pack(padx=20, pady=20)
+        button__login_fiets_ophalen.grid(row=1, column=1, padx=20, pady=20)
 
 # sub frames laten zien
 
@@ -101,8 +121,13 @@ def toon_geregistreerd_stallen():
     fiets_stallen_frame.forget()
     geregistreerd_stallen_frame.pack(fill="both",
                                      expand=True)
-    nummer.pack(padx=20, pady=20)
-    button_stallen.pack(padx=20, pady=20)
+    Label(master=geregistreerd_stallen_frame, text="Fietsnummer:  ")
+    nummer.grid(row=1, column=2, padx=20, pady=20)
+    button_stallen.grid(row=2, column=1, columnspan=2, padx=20, pady=20)
+    geregistreerd_stallen_frame.grid_rowconfigure(0, weight=1)
+    geregistreerd_stallen_frame.grid_rowconfigure(3, weight=1)
+    geregistreerd_stallen_frame.grid_columnconfigure(0, weight=1)
+    geregistreerd_stallen_frame.grid_columnconfigure(2, weight=1)
 
 
 def toon_niet_geregistreerd_stallen():
@@ -119,11 +144,19 @@ def toon_niet_geregistreerd_stallen():
         gebruikersnaam_entry.forget()
         wachtwoord_entry.forget()
         button_registreer_login.forget()
-        naam_reg_entry.pack(padx=20, pady=20)
-        gebruikersnaam_reg_entry.pack(padx=20, pady=20)
-        wachtwoord_reg_entry.pack(padx=20, pady=20)
-        user_key_entry.pack(padx=20, pady=20)
-        button_registreer.pack(padx=20, pady=20)
+        Label(master=niet_geregistreerd_stallen_frame, text="Naam:  ", bg="#f7d417").grid(row=1, column=1, padx=10, pady=20, sticky=E)
+        naam_reg_entry.grid(row=1, column=2, padx=10, pady=20)
+        Label(master=niet_geregistreerd_stallen_frame, text="Gebruikersnaam:  ", bg="#f7d417").grid(row=2, column=1, padx=10, pady=20, sticky=E)
+        gebruikersnaam_reg_entry.grid(row=2, column=2, padx=10, pady=20)
+        Label(master=niet_geregistreerd_stallen_frame, text="Wachtwoord:  ", bg="#f7d417").grid(row=3, column=1, padx=10, pady=20, sticky=E)
+        wachtwoord_reg_entry.grid(row=3, column=2, padx=10, pady=20)
+        Label(master=niet_geregistreerd_stallen_frame, text="Pushover key:  ", bg="#f7d417").grid(row=4, column=1, padx=10, pady=20, sticky=E)
+        user_key_entry.grid(row=4, column=2, padx=10, pady=20)
+        button_registreer.grid(row=5, columnspan=2, column=1, padx=20, pady=20)
+        niet_geregistreerd_stallen_frame.grid_rowconfigure(0, weight=1)
+        niet_geregistreerd_stallen_frame.grid_rowconfigure(6, weight=1)
+        niet_geregistreerd_stallen_frame.grid_columnconfigure(0, weight=1)
+        niet_geregistreerd_stallen_frame.grid_columnconfigure(3, weight=1)
 
 
 
@@ -131,7 +164,11 @@ def toon_info_algemeen():
     info_frame.forget()
     info_algemeen_frame.pack(fill="both", expand=True)
     aantal_vrij_label = Label(master=info_algemeen_frame, text=algemeen())
-    aantal_vrij_label.pack(padx=20, pady=20)
+    aantal_vrij_label.grid(row=1, column=1, padx=20, pady=20)
+    info_algemeen_frame.grid_rowconfigure(0, weight=1)
+    info_algemeen_frame.grid_rowconfigure(2, weight=1)
+    info_algemeen_frame.grid_columnconfigure(0, weight=1)
+    info_algemeen_frame.grid_columnconfigure(2, weight=1)
 var = 0
 
 def toon_info_persoonlijk():
@@ -148,20 +185,28 @@ def toon_info_persoonlijk():
                 readfile = open('login_boolean.txt', 'r')
                 lines = readfile.readlines()
                 list2 = [x.replace('\n', '') for x in lines]
-                info_label = Label(master=info_persoonlijk_frame, text=persoonlijk(list2[1]))
-                naam_label = Label(master=info_persoonlijk_frame, text='Dit account staat op de naam: ' + naam(list2[1]))
-                fiets_nummer_label = Label(master=info_persoonlijk_frame, text='Uw fietsnummer is: ' + fietsnummer(list2[1]))
-                account_aangemaakt_label = Label(master=info_persoonlijk_frame, text=gemaakt(list2[1]))
+                info_label = Label(master=info_persoonlijk_frame, text=persoonlijk(list2[1]), bg="#f7d417")
+                naam_label = Label(master=info_persoonlijk_frame, text='Dit account staat op de naam: ' + naam(list2[1]), bg="#f7d417")
+                fiets_nummer_label = Label(master=info_persoonlijk_frame, text='Uw fietsnummer is: ' + fietsnummer(list2[1]), bg="#f7d417")
+                account_aangemaakt_label = Label(master=info_persoonlijk_frame, text=gemaakt(list2[1]), bg="#f7d417")
                 info_label.pack_forget()
                 naam_label.pack_forget()
                 fiets_nummer_label.pack_forget()
                 account_aangemaakt_label.pack_forget()
-                info_label.pack(padx=20, pady=20)
-                naam_label.pack(padx=20, pady=20)
-                fiets_nummer_label.pack(padx=20, pady=20)
-                account_aangemaakt_label.pack(padx=20, pady=20)
+                info_label.grid(row=1, column=1, padx=20, pady=20)
+                naam_label.grid(row=2, column=1, padx=20, pady=20)
+                fiets_nummer_label.grid(row=3, column=1, padx=20, pady=20)
+                account_aangemaakt_label.grid(row=4, column=1, padx=20, pady=20)
+                info_persoonlijk_frame.grid_rowconfigure(0, weight=1)
+                info_persoonlijk_frame.grid_rowconfigure(5, weight=1)
+                info_persoonlijk_frame.grid_columnconfigure(0, weight=1)
+                info_persoonlijk_frame.grid_columnconfigure(2, weight=1)
     else:
-        button_login_info.pack(padx=20, pady=20)
+        info_persoonlijk_frame.grid_rowconfigure(0, weight=1)
+        info_persoonlijk_frame.grid_rowconfigure(2, weight=1)
+        info_persoonlijk_frame.grid_columnconfigure(0, weight=1)
+        info_persoonlijk_frame.grid_columnconfigure(2, weight=1)
+        button_login_info.grid(row=1, column=1, padx=20, pady=20)
 
 
 def login():
@@ -175,10 +220,16 @@ def login():
     button_info.forget()
     button_login_start.forget()
     inloggen_frame.pack(fill="both", expand=True)
-    gebruikersnaam_entry.pack(padx=20, pady=20)
-    wachtwoord_entry.pack(padx=20, pady=20)
-    button_confirm_login.pack(padx=20, pady=20)
-    button_registreer_login.pack(padx=20, pady=20)
+    Label(master=inloggen_frame, text="Gebruikersnaam:  ", bg="#f7d417").grid(row=1, column=1, pady=20, sticky=E)
+    gebruikersnaam_entry.grid(row=1, column=2, pady=20)
+    Label(master=inloggen_frame, text="Wachtwoord:  ", bg="#f7d417").grid(row=2, column=1, pady=20, sticky=E)
+    wachtwoord_entry.grid(row=2, column=2, pady=20)
+    button_confirm_login.grid(row=3, column=2, padx=20, pady=20)
+    button_registreer_login.grid(row=3, column=1, padx=20, pady=20)
+    inloggen_frame.grid_rowconfigure(0, weight=1)
+    inloggen_frame.grid_rowconfigure(4, weight=1)
+    inloggen_frame.grid_columnconfigure(0, weight=1)
+    inloggen_frame.grid_columnconfigure(3, weight=1)
 
 
 def f_login():
@@ -192,6 +243,7 @@ def f_login():
             if username == lijst[2] and (pbkdf2_sha256.verify(wachtwoord, hash) == True):           #(pbkdf2_sha256.verify(wachtwoord, hash) == True)
                 outfile = open('login_boolean.txt', 'w')
                 outfile.write('True\n'+username+'\n'+wachtwoord)
+                button_login_start.destroy()
                 toon_start_frame()
                 break
         else:
@@ -285,34 +337,39 @@ registreren_frame = Frame(master=root,
                           background='#f7d417')
 
 # buttons
+start_frame.grid_rowconfigure(0, weight=1)
+start_frame.grid_rowconfigure(5, weight=1)
+start_frame.grid_columnconfigure(0, weight=1)
+start_frame.grid_columnconfigure(2, weight=1)
+
 
 button_info = Button(master=start_frame,                # Button_info defineren
                      text="Informatie",
                      command=toon_info_frame,
                      background="#00387b",
                      fg="white")
-button_info.pack(padx=20, pady=20)
+button_info.grid(row=1, column=1, padx=20, pady=20)
 
 button_fiets_stallen = Button(master=start_frame,       # Button stallen defineren
                               text="Fiets stallen",
                               command=toon_fiets_stallen,
                               background="#00387b",
                               fg="white")
-button_fiets_stallen.pack(padx=20, pady=20)
+button_fiets_stallen.grid(row=1, column=1, padx=20, pady=20)
 
 button_fiets_ophalen = Button(master=start_frame,       # Button ophalen defieneren
                               text="Fiets ophalen",
                               command=toon_fiets_ophalen,
                               background="#00387b",
                               fg="white")
-button_fiets_ophalen.pack(padx=20, pady=20)
+button_fiets_ophalen.grid(row=1, column=1, padx=20, pady=20)
 
 button_login_start = Button(master=start_frame,
                             text="Inloggen",
                             command=login,
                             background="#00387b",
                             fg="white")
-button_login_start.pack(padx=20, pady=20)
+button_login_start.grid(row=1, column=1, padx=20, pady=20)
 # sub buttons
 button_fiets_ophalen_confirm = Button(master=fiets_ophalen_frame,
                                       text="Weet u zeker dat u uw fiets wilt ophalen?",
