@@ -14,11 +14,11 @@ def stallen(nummer: str):
             break
 
     try:                                                                    # Checken of fiets al gestald is, zo niet
-        if lijst[index][4] == 'True':                                       # dan de waarde 'gestald' naar True
+        if lijst[index][5] == 'True':                                       # dan de waarde 'gestald' naar True
             return 2                                                        # En de tijd toevoegen.
-        elif lijst[index][4] == 'False':
+        elif lijst[index][5] == 'False':
             lijst[index][-1] = datetime.datetime.today().strftime("%a %d %b %Y om %H:%M:%S")
-            lijst[index][4] = 'True'
+            lijst[index][5] = 'True'
     except:
         return 1
 
@@ -34,3 +34,4 @@ def stallen(nummer: str):
     open(bestand,'w').write(newFile)
     open(bestand).close()
     return 0
+

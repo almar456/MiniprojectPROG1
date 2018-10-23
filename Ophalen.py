@@ -13,10 +13,10 @@ def ophalen(username: str, wachtwoord: str):
             index = lijst.index(x)
 
     try:
-        if lijst[index][4] == 'True':                                           # Kijken of de fiets al gestald is, zo ja
-            lijst[index][4] = 'False'                                           # dan de waarde van 'gestald' naar False
+        if lijst[index][5] == 'True':                                           # Kijken of de fiets al gestald is, zo ja
+            lijst[index][5] = 'False'                                           # dan de waarde van 'gestald' naar False
             lijst[index][-1] = '-'
-        elif lijst[index][4] == 'False':
+        elif lijst[index][5] == 'False':
             return 2
     except:
         return 1
@@ -33,5 +33,3 @@ def ophalen(username: str, wachtwoord: str):
     open(bestand, 'w').write(newFile)
     open(bestand).close()
     return 0
-
-ophalen('almar456', 'lmao420')
