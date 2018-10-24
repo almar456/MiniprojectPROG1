@@ -3,6 +3,7 @@ def stallen(nummer: str):
 
     bestand = 'fietsen.csv'                                                 # Informatie ophalen en in lijst zetten
     file = open(bestand, 'r').read()
+    lines = open(bestand, 'r').readlines()
     open(bestand).close()
     lijst = file.split('\n')
     for x in lijst:
@@ -12,16 +13,18 @@ def stallen(nummer: str):
         if (str(nummer) == x[0]):
             index = lijst.index(x)
             break
-
-    try:                                                                    # Checken of fiets al gestald is, zo niet
-        if lijst[index][5] == 'True':                                       # dan de waarde 'gestald' naar True
-            return 2                                                        # En de tijd toevoegen.
-        elif lijst[index][5] == 'False':
-            lijst[index][-1] = datetime.datetime.today().strftime("%a %d %b %Y om %H:%M:%S")
-            lijst[index][5] = 'True'
-    except:
-        return 1
-
+    if len(lines) < 120:
+        try:                                                                    # Checken of fiets al gestald is, zo niet
+            if lijst[index][5] == 'True':                                       # dan de waarde 'gestald' naar True
+                return 2                                                        # En de tijd toevoegen.
+            elif lijst[index][5] == 'False':
+                lijst[index][-1] = datetime.datetime.today().strftime("%a %d %b %Y om %H:%M:%S")
+                lijst[index][5] = 'True'
+        except:
+            return 1
+    elif len(lines) >= 120:
+        print('te veel fietsen')
+        return 3
     newFile = ''                                                            # eventuele verandering opslaan in csv
     for x in lijst:
         if x == ['']:
@@ -34,4 +37,3 @@ def stallen(nummer: str):
     open(bestand,'w').write(newFile)
     open(bestand).close()
     return 0
-

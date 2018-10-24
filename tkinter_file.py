@@ -261,6 +261,8 @@ def if_loop():
         toon_start_frame()
     elif stallen(nummer.get()) == 1:
         showinfo(title='popup', message='Het ingevoerde nummer is incorrect')
+    elif stallen(nummer.get()) == 3:
+        showinfo(title='popup', message='De fietsen stalling staat vol, sorry')
     else:
         showinfo(title='popup', message='Uw fiets is al gestald')
         toon_start_frame()
