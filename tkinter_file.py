@@ -13,6 +13,7 @@ outfile.write('False')
 
 
 def toon_start_frame():                                 # Functie om start_frame te laten zien
+    start_frame.forget()
     fiets_stallen_frame.pack_forget()
     fiets_ophalen_frame.pack_forget()
     inloggen_frame.forget()
@@ -26,12 +27,13 @@ def toon_start_frame():                                 # Functie om start_frame
     button_fiets_ophalen.grid(row=3, column=1, padx=20, pady=20)
     start_frame.pack(fill="both",
                      expand=True)
-    readfile = open('login_boolean.txt', 'r')
-    lines = readfile.readlines()
-    if 'True\n' in lines:
-        button_login_start.destroy()
-    else:
-        button_login_start.grid(row=4, column=1, padx=20, pady=20)
+    for x in range(0, 2):
+        readfile = open('login_boolean.txt', 'r')
+        lines = readfile.readlines()
+        if 'True\n' in lines:
+            button_login_start.destroy()
+        else:
+            button_login_start.grid(row=4, column=1, padx=20, pady=20)
 
 
 def toon_info_frame():                                  # Functie om info_frame te laten zien
@@ -113,7 +115,6 @@ def toon_fiets_ophalen():                               # Functie om fiets_ophal
         button_fiets_ophalen_confirm.grid(row=1, column=1, pady=20, padx=20)
     else:
         button__login_fiets_ophalen.grid(row=1, column=1, padx=20, pady=20)
-
 # sub frames laten zien
 
 
@@ -121,13 +122,13 @@ def toon_geregistreerd_stallen():
     fiets_stallen_frame.forget()
     geregistreerd_stallen_frame.pack(fill="both",
                                      expand=True)
-    Label(master=geregistreerd_stallen_frame, text="Fietsnummer:  ")
+    Label(master=geregistreerd_stallen_frame, text="Fietsnummer:  ", bg="#f7d417").grid(row=1, column=1)
     nummer.grid(row=1, column=2, padx=20, pady=20)
     button_stallen.grid(row=2, column=1, columnspan=2, padx=20, pady=20)
     geregistreerd_stallen_frame.grid_rowconfigure(0, weight=1)
     geregistreerd_stallen_frame.grid_rowconfigure(3, weight=1)
     geregistreerd_stallen_frame.grid_columnconfigure(0, weight=1)
-    geregistreerd_stallen_frame.grid_columnconfigure(2, weight=1)
+    geregistreerd_stallen_frame.grid_columnconfigure(3, weight=1)
 
 
 def toon_niet_geregistreerd_stallen():
@@ -243,7 +244,11 @@ def f_login():
             if username == lijst[2] and (pbkdf2_sha256.verify(wachtwoord, hash) == True):           #(pbkdf2_sha256.verify(wachtwoord, hash) == True)
                 outfile = open('login_boolean.txt', 'w')
                 outfile.write('True\n'+username+'\n'+wachtwoord)
-                button_login_start.destroy()
+                showinfo(title='popup', message='U bent ingelogd')
+                outfile.close()
+                button_login_start.forget()
+                # button_login_start.destroy()
+                start_frame.forget()
                 toon_start_frame()
                 break
         else:
@@ -465,4 +470,3 @@ nummer = Entry(master=geregistreerd_stallen_frame)
 
 toon_start_frame()                                      # start_frame uitvoeren
 root.mainloop()                                         # root mainloop uitvoeren
-
