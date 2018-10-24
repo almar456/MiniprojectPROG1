@@ -164,7 +164,7 @@ def toon_niet_geregistreerd_stallen():
 def toon_info_algemeen():
     info_frame.forget()
     info_algemeen_frame.pack(fill="both", expand=True)
-    aantal_vrij_label = Label(master=info_algemeen_frame, text=algemeen())
+    aantal_vrij_label = Label(master=info_algemeen_frame, text=algemeen(), bg="#f7d417")
     aantal_vrij_label.grid(row=1, column=1, padx=20, pady=20)
     info_algemeen_frame.grid_rowconfigure(0, weight=1)
     info_algemeen_frame.grid_rowconfigure(2, weight=1)
