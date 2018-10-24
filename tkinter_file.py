@@ -80,14 +80,21 @@ def toon_fiets_stallen():                               # Functie om fiets_stall
     fiets_stallen_frame.grid_columnconfigure(0, weight=1)
     fiets_stallen_frame.grid_columnconfigure(2, weight=1)
     fiets_stallen_frame.pack(fill="both", expand=True )
-    button_geregistreerd_stallen.grid(row=1,
-                                      column=1,
-                                      padx=20,
-                                      pady=20)
-    button_niet_geregistreerd_stallen.grid(row=2,
-                                           column=1,
-                                           padx=20,
-                                           pady=20)
+    if 'True\n' in lines:
+        button_geregistreerd_stallen.grid(row=1,
+                                          column=1,
+                                          padx=20,
+                                          pady=20)
+        button_niet_geregistreerd_stallen.forget()
+    else:
+        button_geregistreerd_stallen.grid(row=1,
+                                          column=1,
+                                          padx=20,
+                                          pady=20)
+        button_niet_geregistreerd_stallen.grid(row=2,
+                                               column=1,
+                                               padx=20,
+                                               pady=20)
 
 
 def toon_fiets_ophalen():                               # Functie om fiets_ophalen_frame te laten zien
@@ -179,30 +186,31 @@ def toon_info_persoonlijk():
                                 expand=True)
     readfile = open('login_boolean.txt', 'r')
     lines = readfile.readlines()
+    readfile.close()
     if 'True\n' in lines:
-            if var == 0:
-                var = 1
-                button_login_info.forget()
-                readfile = open('login_boolean.txt', 'r')
-                lines = readfile.readlines()
-                list2 = [x.replace('\n', '') for x in lines]
-                info_label = Label(master=info_persoonlijk_frame, text=persoonlijk(list2[1]), bg="#f7d417")
-                naam_label = Label(master=info_persoonlijk_frame, text='Dit account staat op de naam: ' + naam(list2[1]), bg="#f7d417")
-                fiets_nummer_label = Label(master=info_persoonlijk_frame, text='Uw fietsnummer is: ' + fietsnummer(list2[1]), bg="#f7d417")
-                account_aangemaakt_label = Label(master=info_persoonlijk_frame, text=gemaakt(list2[1]), bg="#f7d417")
-                info_label.pack_forget()
-                naam_label.pack_forget()
-                fiets_nummer_label.pack_forget()
-                account_aangemaakt_label.pack_forget()
-                info_label.grid(row=1, column=1, padx=20, pady=20)
-                naam_label.grid(row=2, column=1, padx=20, pady=20)
-                fiets_nummer_label.grid(row=3, column=1, padx=20, pady=20)
-                account_aangemaakt_label.grid(row=4, column=1, padx=20, pady=20)
-                info_persoonlijk_frame.grid_rowconfigure(0, weight=1)
-                info_persoonlijk_frame.grid_rowconfigure(5, weight=1)
-                info_persoonlijk_frame.grid_columnconfigure(0, weight=1)
-                info_persoonlijk_frame.grid_columnconfigure(2, weight=1)
+        button_login_info.destroy()
+        readfile = open('login_boolean.txt', 'r')
+        lines = readfile.readlines()
+        list2 = [x.replace('\n', '') for x in lines]
+        info_label = Label(master=info_persoonlijk_frame, text=persoonlijk(list2[1]), bg="#f7d417").forget()
+        info_label = Label(master=info_persoonlijk_frame, text=persoonlijk(list2[1]), bg="#f7d417")
+        naam_label = Label(master=info_persoonlijk_frame, text='Dit account staat op de naam: ' + naam(list2[1]), bg="#f7d417")
+        fiets_nummer_label = Label(master=info_persoonlijk_frame, text='Uw fietsnummer is: ' + fietsnummer(list2[1]), bg="#f7d417")
+        account_aangemaakt_label = Label(master=info_persoonlijk_frame, text=gemaakt(list2[1]), bg="#f7d417")
+        info_label.forget()
+        naam_label.forget()
+        fiets_nummer_label.forget()
+        account_aangemaakt_label.forget()
+        info_label.grid(row=1, column=1, padx=20, pady=20)
+        naam_label.grid(row=2, column=1, padx=20, pady=20)
+        fiets_nummer_label.grid(row=3, column=1, padx=20, pady=20)
+        account_aangemaakt_label.grid(row=4, column=1, padx=20, pady=20)
+        info_persoonlijk_frame.grid_rowconfigure(0, weight=1)
+        info_persoonlijk_frame.grid_rowconfigure(5, weight=1)
+        info_persoonlijk_frame.grid_columnconfigure(0, weight=1)
+        info_persoonlijk_frame.grid_columnconfigure(2, weight=1)
     else:
+
         info_persoonlijk_frame.grid_rowconfigure(0, weight=1)
         info_persoonlijk_frame.grid_rowconfigure(2, weight=1)
         info_persoonlijk_frame.grid_columnconfigure(0, weight=1)
