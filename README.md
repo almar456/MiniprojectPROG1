@@ -11,7 +11,7 @@ Handleiding NS Fietsenstalling
 6.	Zorg dat alle benodigde packages geïnstalleerd zijn op de interpreter.
 7.	Run via de interpreter ‘tkinter_file.py’.
 
-
+Om de volledige functionaliteit van ons progamma te benutten moet de gebruiker de applicatie Pushover installeren en een account aanmaken
 
 Hieronder een lijst met packages en versies die ten minste geïnstalleerd moeten zijn op de interpreter:
 
