@@ -180,8 +180,11 @@ def toon_info_algemeen():                                       # frame algemene
     info_algemeen_frame.pack(fill="both", expand=True)
     aantal_vrij_label = Label(master=info_algemeen_frame, text=algemeen(), bg="#f7d417")
     aantal_vrij_label.grid(row=1, column=1, padx=20, pady=20)
+    tekst = "Om een account te registreren zult u een pushover code opgeven\n Deze code verkrijgt u door de Pushover applicatie te downloaden en een account te registreren"
+    pushover_label = Label(master=info_algemeen_frame, text=tekst, bg="#f7d417")
+    pushover_label.grid(row=2, column=1, padx=20, pady=20)
     info_algemeen_frame.grid_rowconfigure(0, weight=1)
-    info_algemeen_frame.grid_rowconfigure(2, weight=1)
+    info_algemeen_frame.grid_rowconfigure(3, weight=1)
     info_algemeen_frame.grid_columnconfigure(0, weight=1)
     info_algemeen_frame.grid_columnconfigure(2, weight=1)
 
@@ -417,7 +420,7 @@ button_niet_geregistreerd_stallen = Button(master=fiets_stallen_frame,
                                            fg="white")
 
 button_info_algemeen = Button(master=info_frame,
-                              text="Algemene informatie en voorwaarden",
+                              text="Algemene informatie",
                               command=toon_info_algemeen,
                               background="#00387b",
                               fg="white")
