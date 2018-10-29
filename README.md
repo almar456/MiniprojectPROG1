@@ -15,14 +15,14 @@ Handleiding NS Fietsenstalling
 
 Hieronder een lijst met packages en versies die ten minste geïnstalleerd moeten zijn op de interpreter:
 
-certifi	2018.8.24
-chardet	3.0.4
-idna	2.7
-passlib	1.7.1
-pip	18.1
-pygame	1.9.3
-requests	2.20.0
-setuptools	28.8.0
-urllib3	1.23
-virtualenv	16.0.0
+certifi	2018.8.24,
+chardet	3.0.4,
+idna	2.7,
+passlib	1.7.1,
+pip	18.1,
+pygame	1.9.3,
+requests	2.20.0,
+setuptools	28.8.0,
+urllib3	1.23,
+virtualenv	16.0.0.
 
