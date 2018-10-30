@@ -12,6 +12,7 @@ Handleiding NS Fietsenstalling
 7.	Run via de interpreter ‘tkinter_file.py’.
 
 Om de volledige functionaliteit van ons progamma te benutten moet de gebruiker de applicatie Pushover installeren en een account aanmaken
+Deze applicatie zorgt dat de gebruiker een melding krijgt als deze zijn fiets heeft opgehaald
 
 Hieronder een lijst met packages en versies die ten minste geïnstalleerd moeten zijn op de interpreter:
 
