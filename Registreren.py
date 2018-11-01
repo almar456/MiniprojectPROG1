@@ -8,13 +8,16 @@ def registreren(wachtwoord: str, username: str, naam: str, user_code: str):
     # Genereer code d.m.v. randint
 
     code = randint(1000, 9999)
+    
+    # Sla de tijd op in de variable registeredDate van de registratie met als template "%x %X"
 
     registeredDate = datetime.now().strftime("%x %X")
 
-
-    # Gegevens die de gebruiker invoert in een list
+    # Hash de wachtwoord input met sha256(passlib)
 
     hash = pbkdf2_sha256.hash(wachtwoord)
+    
+    # Alle gegevens opslaan in een list genaamd gegevens
 
     gegevens = [code, hash, username, naam, registeredDate, True, user_code, '-']
 
