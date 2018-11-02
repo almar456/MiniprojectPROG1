@@ -1,5 +1,5 @@
-import http.client, urllib
-def pushover_send(username):
+import http.client, urllib                                          #urlib en http.client importen
+def pushover_send(username):                                        # functie om pushover berichten te sturen (pushover api)
     readfile = open('fietsen.csv', 'r').readlines()
     for regel in readfile:
         lijst = regel.split(';')
