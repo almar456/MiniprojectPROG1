@@ -17,7 +17,7 @@ Deze applicatie zorgt dat de gebruiker een melding krijgt als deze zijn fiets he
 Dit is een link naar de Screencast van ons Project:
 https://youtu.be/IuFhuaC7spk
 
-Hier de link naar het eindverslag: https://docs.google.com/document/d/1AeT-wmOgcSSTa5XRsWAgptTYut76C1wZZZnsEmaIupU/edit?usp=sharing
+Hier de link naar het eindverslag: https://drive.google.com/file/d/1RjgVnO9313JbfEy3Od5NLjpBidTKIlkS/view?usp=sharing
 
 Hieronder een lijst met packages en versies die ten minste geïnstalleerd moeten zijn op de interpreter:
 
